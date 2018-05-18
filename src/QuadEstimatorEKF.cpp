@@ -168,8 +168,18 @@ VectorXf QuadEstimatorEKF::PredictState(VectorXf curState, float dt, V3F accel, 
   Quaternion<float> attitude = Quaternion<float>::FromEuler123_RPY(rollEst, pitchEst, curState(6));
 
   ////////////////////////////// BEGIN STUDENT CODE ///////////////////////////
-
-
+   V3F inertialAcceleration = attitude.Rotate_BtoI(accel);
+ //  V3F bodyPossition = attitude.Rotate_BtoI(accel);
+   predictedState(0) = predictedState(0) + predictedState(3) * dt;
+   predictedState(1) = predictedState(1) + predictedState(4) * dt;
+   predictedState(2) = predictedState(2) + predictedState(5) * dt;
+   predictedState(3) = predictedState(3) + inertialAcceleration.x * dt;
+   predictedState(4) = predictedState(4) + inertialAcceleration.y * dt;
+   predictedState(5) = predictedState(5) + (inertialAcceleration.z - CONST_GRAVITY) * dt;
+    
+ //   predictedState(0) = predictedState(0) + bodyPossition.x * dt;
+ //   predictedState(1) = predictedState(1) + bodyPossition.y * dt;
+ //   predictedState(2) = predictedState(2) + (bodyPossition.z - CONST_GRAVITY) * dt;
   /////////////////////////////// END STUDENT CODE ////////////////////////////
 
   return predictedState;
@@ -195,6 +205,12 @@ MatrixXf QuadEstimatorEKF::GetRbgPrime(float roll, float pitch, float yaw)
   //   that your calculations are reasonable
 
   ////////////////////////////// BEGIN STUDENT CODE ///////////////////////////
+  RbgPrime(0.0) = -cos(roll) * sin(yaw);
+  RbgPrime(0.1) = -sin(pitch) * sin(roll) * sin(yaw) - cos(roll) * cos(yaw);
+  RbgPrime(0.2) = -cos(pitch) * sin(roll) * sin(yaw) + sin(pitch) * cos(yaw);
+  RbgPrime(1.0) = cos(roll) * cos(yaw);
+  RbgPrime(1.1) = sin(pitch) * sin(roll) * cos(yaw) - cos(pitch) * cos(yaw);
+  RbgPrime(1.2) = cos(pitch) * sin(roll) * cos(yaw) + sin(pitch) * sin(yaw);
 
 
   /////////////////////////////// END STUDENT CODE ////////////////////////////
@@ -241,7 +257,7 @@ void QuadEstimatorEKF::Predict(float dt, V3F accel, V3F gyro)
   gPrime.setIdentity();
 
   ////////////////////////////// BEGIN STUDENT CODE ///////////////////////////
-
+//  gPrime = [[1, 0, 0, dt, 0, 0, 0],[0, 1, 0, 0, dt, 0, 0], [0, 0, 1, 0, 0 , dt, 0], [0, 0, 0, 1, 0, 0, RbgPrime[0] * accel.x * dt], [0, 0, 0, 0, 1, 0, RbgPrime[1] * dt], [0, 0, 0, 0, 0, 1, RbgPrime[2] * dt], [0, 0, 0, 0, 0, 0, 1] ];
 
   /////////////////////////////// END STUDENT CODE ////////////////////////////
 

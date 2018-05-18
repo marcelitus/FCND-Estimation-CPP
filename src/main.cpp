@@ -38,17 +38,8 @@ int randomNumCarry=-1;
 void OnTimer(int v);
 
 vector<QuadcopterHandle> CreateVehicles();
-//string _scenarioFile="../config/01_Intro.txt";
-//string _scenarioFile="../config/02_AttitudeControl.txt";
-//string _scenarioFile="../config/03_PositionControl.txt";
-//string _scenarioFile="../config/04_Nonidealities.txt";
-//string _scenarioFile="../config/05_TrajectoryFollow.txt";
-//string _scenarioFile="../config/06_SensorNoise.txt";
-string _scenarioFile="../config/07_AttitudeEstimation.txt";
-//string _scenarioFile="../config/08_PredictState.txt";
-//string _scenarioFile="../config/09_PredictCovariance.txt";
-//string _scenarioFile="../config/10_MagUpdate.txt";
-//string _scenarioFile="../config/11_GPSUpdate.txt";
+string _scenarioFile="../config/01_Intro.txt";
+
 #include "MavlinkNode/MavlinkNode.h"
 shared_ptr<MavlinkNode> mlNode;
 

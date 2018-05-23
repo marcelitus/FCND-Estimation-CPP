@@ -14,6 +14,7 @@ Then I looked up instrucions on how to calculate the Standar Deviation. Below is
 
 MeasuredStdDev_GPSPosX calulation:
 
+```
 	9.605251	0.090992	0.114107253	0.013020465
 	9.705292	-0.034533	-0.011417747	0.000130365
 	9.805332	-0.507209	-0.484093747	0.234346756
@@ -23,9 +24,11 @@ Count		99	99	99
 AverageMean)		-0.023115253		
 Variance				0.514778533
 Stnd Dev				0.717480685
+```
 
 MeasuredStdDev_AccelXY calulation:
 
+```
 	6.694697	-0.222196	-0.199983	0.0399932
 	6.699697	0.708848	0.731061	0.534450186
 	6.704697	0.916377	0.93859	0.880951188
@@ -34,7 +37,8 @@ Count		1341	1341	1341
 AverageMean)		-0.002186708		
 Variance				0.262669226
 Stnd Dev				0.51251266
-
+```
+å
 Then I updated the values in 06_SensorNoise.txt
 
 MeasuredStdDev_GPSPosXY = .71

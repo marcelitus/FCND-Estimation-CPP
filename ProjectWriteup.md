@@ -84,4 +84,5 @@ This was a somwewhat easy function following the information in this document an
 These 2 functions are very straightforward using the information in the document below.
 
 https://www.overleaf.com/read/vymfngphcccj
+
 All scenarios pass in my program.

@@ -13,18 +13,26 @@ I used the FromEulerRPY function to assign the quaternion from rollEst, pitchEst
 Then I integrated it with IntegrateBodyRate(gyro, dtIMU) to get the body rates.
 From then I converted back to Euler and assigned to a vector, form wich each component was assigned to the corresponding values.
 
+```c++
+
  Quaternion<float> estAttitude;
+
   estAttitude = estAttitude.FromEuler123_RPY(rollEst, pitchEst, ekfState(6));
+
   estAttitude.IntegrateBodyRate(gyro, dtIMU);
   V3D IMUValues = estAttitude.ToEulerRPY();
-  
   float predictedPitch = IMUValues.y;
   float predictedRoll = IMUValues.x;
   ekfState(6) = IMUValues.z;
 
+```
+
 ### PredictState ###
 
 This is a fairly simple part, I used the hint to calculate to rotate the body rate to the inertial frame. And then I calulated each predicted state using the position and accelerations accordingly. I made sure to substract the gravity constant from the Z acceleration.
+
+
+```c++
 
 V3F inertialAcceleration = attitude.Rotate_BtoI(accel);
  //  V3F bodyPossition = attitude.Rotate_BtoI(accel);
@@ -35,6 +43,7 @@ V3F inertialAcceleration = attitude.Rotate_BtoI(accel);
    predictedState(4) = predictedState(4) + inertialAcceleration.y * dt;
    predictedState(5) = predictedState(5) + (inertialAcceleration.z - CONST_GRAVITY) * dt;
 
+```
 
 ### GetRbgPrime ###
 
@@ -46,7 +55,10 @@ https://www.overleaf.com/read/vymfngphcccj
 
 This was a somwewhat easy function following the information in this document and making sure that in the the component for Z I substracted CONST_GRAVITY as well.
 
-gPrime(0,0) = 1;
+
+```c++
+
+  gPrime(0,0) = 1;
   gPrime(0,3) = dt;
   gPrime(1,1) = 1;
   gPrime(1,4) = dt;
@@ -64,6 +76,8 @@ gPrime(0,0) = 1;
 //  gPrime(5, 6) = ((RbgPrime(2,0) * accel.x) + (RbgPrime(2,1) * accel.y) + (RbgPrime(2,2) * accel.z)) * dt;
 
   ekfCov = gPrime * ekfCov * gPrime.transpose() + Q;
+
+```
 
  ### UpdateFromGPS and UpdateFromMag ### 
 

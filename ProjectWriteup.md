@@ -6,6 +6,40 @@ This is the writeup for the C++ Estimation project.
 
 Below are the notes on each of the required sections for this project.
 
+## Sensor Noise ##
+
+For this part of the project I ran the Sensor Noise Scenario, until just before the reset. 
+Then I took the data in config/log/Graph1.txt (GPS X data) and config/log/Graph2.txt (Accelerometer X data) and pasted in Excel.
+Then I looked up instrucions on how to calculate the Standar Deviation. Below is a screenshoot of part of my Excel spreasheet.
+
+MeasuredStdDev_GPSPosX calulation:
+
+	9.605251	0.090992	0.114107253	0.013020465
+	9.705292	-0.034533	-0.011417747	0.000130365
+	9.805332	-0.507209	-0.484093747	0.234346756
+	9.905373	0.853465	0.876580253	0.768392939
+Sum		-2.28841	0	50.44829621
+Count		99	99	99
+AverageMean)		-0.023115253		
+Variance				0.514778533
+Stnd Dev				0.717480685
+
+MeasuredStdDev_AccelXY calulation:
+
+	6.694697	-0.222196	-0.199983	0.0399932
+	6.699697	0.708848	0.731061	0.534450186
+	6.704697	0.916377	0.93859	0.880951188
+Sum		-2.932376	26.855257	351.9767634
+Count		1341	1341	1341
+AverageMean)		-0.002186708		
+Variance				0.262669226
+Stnd Dev				0.51251266
+
+Then I updated the values in 06_SensorNoise.txt
+
+MeasuredStdDev_GPSPosXY = .71
+MeasuredStdDev_AccelXY = .51
+
 ## UpdateFrom IMU ##
 
 For this part I decided to use the Quaternion method, whcih seemed simpler to me.
